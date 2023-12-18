@@ -41,6 +41,7 @@
 * uuid
 * Git
 * vite
+* Redux/toolkit
 
 ## Setup/Installation Requirements
 
@@ -55,13 +56,11 @@
 5. to run the Project site, type these commands into terminal: `npm install`, `npm run dev`, `o + enter`
 
 ## Known Bugs
-* None as of now.
+* cant refactor the site completely. not sure what i can do to fix
 
-## link to old repo
-Problems while pushing, messed up code
-will figure out how to fix it later this week, 
-project is buggy.
-(https://github.com/gabe9t/projectweek82)
+## Other repo
+repo this is copied from 
+(https://github.com/gabe9t/projectweek8)
 
 ## License
 MIT License. See license.md for further information

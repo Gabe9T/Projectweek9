@@ -1,0 +1,9 @@
+export const TOGGLE_FORM_VISIBILITY = 'TOGGLE_FORM_VISIBILITY';
+export const EDIT_COFFEE = 'EDIT_COFFEE';
+export const UPDATE_COFFEE = 'UPDATE_COFFEE';
+export const ADD_COFFEE = 'ADD_COFFEE';
+export const SELECT_COFFEE = 'SELECT_COFFEE';
+export const DELETE_COFFEE = 'DELETE_COFFEE';
+export const SELL_POUND = 'SELL_POUND';
+export const BUY_POUND = 'BUY_POUND';
+export const TOGGLE_BOUGHT_ITEMS = 'TOGGLE_BOUGHT_ITEMS';

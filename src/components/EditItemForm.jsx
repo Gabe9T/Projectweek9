@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../redux/actions';
 import ReusableForm from './ReusableForm';
 
 function EditItemForm(props) {
@@ -29,4 +31,4 @@ function EditItemForm(props) {
   );
 }
 
-export default EditItemForm;
+export default connect(null, actions)(EditItemForm);

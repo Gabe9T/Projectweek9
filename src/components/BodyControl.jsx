@@ -1,62 +1,33 @@
 import React from 'react';
-import ItemsList from './ItemsList';
-import NewItemForm from './NewItemForm';
-import { useState } from 'react';
-import masterList from './MasterList/MasterList';
+import { connect } from 'react-redux';
+import * as actions from '../redux/actions';
+import EditItemForm from './EditItemForm'; 
+import ItemsList from './ItemsList'; 
 import ItemDetail from './ItemDetail';
-import EditItemForm from './EditItemForm';
-
 
 class BodyControl extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      formVisibleOnPage: false,
-      mainNewCoffeeList: [...masterList],
-      selectedCoffee: null,
-      editing: false,
-      showBoughtItems: false,
-      boughtItems: [],
-    };
-  }
-  handleClick = () => {
-    if (this.state.selectedCoffee != null) {
-      this.setState({
-        formVisibleOnPage: false,
-        selectedCoffee: null,
-        editing: false
-      });
-    } else {
-      this.setState(prevState => ({
-        formVisibleOnPage: !prevState.formVisibleOnPage
-      }));
+    handleClick = () => {
+        this.props.toggleFormVisibility();
+      };
+    handleEditClick = () => {
+        this.props.editCoffee(true);
     }
-  }
-  handleEditClick = () => {
-    this.setState({ editing: true });
-  }
-  handleEditingItemInList = (coffeeToEdit) => {
-    const editedInventory = this.state.mainNewCoffeeList
-      .filter(coffee => coffee.id !== this.state.selectedCoffee.id)
-      .concat(coffeeToEdit);
-    this.setState({
-      mainNewCoffeeList: editedInventory,
-      editing: false,
-      selectedCoffee: null
-    });
-  }
-
-  handleUpdateCoffee = (updatedCoffee) => {
-    this.handleEditingItemInList(updatedCoffee);
-  };
+    handleEditingItemInList = (coffeeToEdit) => {
+      this.props.editCoffee(coffeeToEdit);
+    }
+  
+    handleUpdateCoffee = (updatedCoffee) => {
+      this.handleEditingItemInList(updatedCoffee);
+    };
 
   handleNewItem = (newCoffee) => {
+    this.props.addCoffee(newCoffee);
     const newInventory = this.state.mainNewCoffeeList.concat(newCoffee);
     this.setState({
       mainNewCoffeeList: newInventory,
       formVisibleOnPage: false
-    });
-  }
+  })
+};
   handleChangingselectedCoffee = (id) => {
     const selectedCoffee = this.state.mainNewCoffeeList.filter(coffee => coffee.id === id)[0];
     this.setState({ selectedCoffee: selectedCoffee });
@@ -113,22 +84,20 @@ class BodyControl extends React.Component {
     });
   };
   toggleBoughtItems = () => {
-    this.setState((prevState) => ({
-      showBoughtItems: !prevState.showBoughtItems,
-    }));
+    this.props.toggleBoughtItems();
   };
   render() {
     let currentlyVisibleState = null;
     let buttontext = "Return To Menu";
 
-    if (this.state.editing) {
+    if (this.props.editing) {
       currentlyVisibleState = (
         <>
           <EditItemForm coffee={this.state.selectedCoffee} onEditItem={this.handleUpdateCoffee} />
           <button onClick={this.handleClick}>{buttontext}</button>
         </>
       );
-    } else if (this.state.selectedCoffee != null) {
+    } else if (this.props.selectedCoffee != null) {
       currentlyVisibleState = (
         <ItemDetail
           coffee={this.state.selectedCoffee}
@@ -137,14 +106,14 @@ class BodyControl extends React.Component {
         />
       );
       buttontext = "Back to coffee roasts for sale";
-    } else if (this.state.formVisibleOnPage) {
+    } else if (this.props.formVisibleOnPage) {
       currentlyVisibleState = <NewItemForm onNewItemCreation={this.handleNewItem} />;
       buttontext = "Return to inventory for sale";
     } else {
       currentlyVisibleState = (
         <>
           <ItemsList
-            inventory={this.state.mainNewCoffeeList}
+            inventory={this.props.mainNewCoffeeList}
             onItemSelection={this.handleChangingselectedCoffee}
             onBuyPound={this.handleBuyPound}
             onSellPound={this.handleSellPound}
@@ -156,16 +125,16 @@ class BodyControl extends React.Component {
     }
 
     return (
-      <>
-        <div style={{ display: 'flex' }}>
-          <div style={{ flex: 1 }}>
-            {currentlyVisibleState}
-          </div>
-          <div style={{ width: '20%' }}>
+        <>
+          <div style={{ display: 'flex' }}>
+            <div style={{ flex: 1 }}>
+              {currentlyVisibleState}
+            </div>
+            <div style={{ width: '20%' }}>
             <h2>Bought Items</h2>
             <ul>
-              {this.state.boughtItems.length > 0 &&
-                this.state.boughtItems.reduce((uniqueItems, item) => {
+              {this.props.boughtItems.length > 0 &&
+                this.props.boughtItems.reduce((uniqueItems, item) => {
                   const existingItem = uniqueItems.find((unique) => unique.id === item.id);
 
                   if (existingItem) {
@@ -181,10 +150,20 @@ class BodyControl extends React.Component {
                   </li>
                 ))}
             </ul>
+            </div>
           </div>
-        </div>
-      </>
-    );
+        </>
+      );
+    }
   }
-}
-export default BodyControl;
+
+  const mapStateToProps = (state) => ({
+    formVisibleOnPage: state.formVisibleOnPage,
+    mainNewCoffeeList: state.mainNewCoffeeList,
+    selectedCoffee: state.selectedCoffee,
+    editing: state.editing,
+    showBoughtItems: state.showBoughtItems,
+    boughtItems: state.boughtItems,
+  });
+  
+  export default connect(mapStateToProps, actions)(BodyControl);

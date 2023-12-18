@@ -2,24 +2,11 @@ import PropTypes from 'prop-types';
 import Items from "./Items";
 
 const ItemsList = (props) => {
-  const itemStyle = {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
-  };
-
-  const boughtItemsListStyle = {
-    width: '20%',
-  };
-
-  let currentInventory = props.inventory;
-
   return (
     <>
       <hr />
-      <div style={itemStyle}>
-        {currentInventory.map((coffee) => (
+      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
+        {props.inventory.map((coffee) => (
           <Items
             whenItemClicked={props.onItemSelection}
             onBuyPound={props.onBuyPound}
@@ -35,8 +22,6 @@ const ItemsList = (props) => {
             key={coffee.id}
           />
         ))}
-      </div>
-      <div style={boughtItemsListStyle}>
       </div>
     </>
   );

@@ -1,21 +1,3 @@
-// import coffeeReducer from '../../redux/reducers';
-
-// describe('Redux Reducer', () => {
-//   it('should handle ADD_COFFEE', () => {
-//     const initialState = {
-//       mainNewCoffeeList: [],
-//     };
-//     const coffee = { name: 'Test Coffee', id: '123' };
-//     const action = { type: 'ADD_COFFEE', payload: coffee };
-//     expect(coffeeReducer(initialState, action)).toEqual({
-//       mainNewCoffeeList: [coffee],
-//     });
-//   });
-
-//   it('should handle UPDATE_COFFEE', () => {
-//     // Similar tests for other reducer cases (DELETE_COFFEE, BUY_POUND, SELL_POUND)
-//   });
-// });
 import coffeeReducer from '../../redux/reducers';
 
 describe('Redux Reducer', () => {

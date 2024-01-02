@@ -15,7 +15,10 @@ function ReusableForm(props) {
           placeholder='Describe Item' />
         <br />
         <label htmlFor="price">Price: </label>
-        <input type='number' name='price' placeholder='Price' />
+        <input
+          type='text'
+          name='price'
+          placeholder='Price' />
         <br />
         <label htmlFor="quantity">quantity: </label>
         <input

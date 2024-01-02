@@ -1,54 +1,24 @@
-import * as actionTypes from './actionTypes';
-
-const toggleFormVisibility = () => ({
-  type: actionTypes.TOGGLE_FORM_VISIBILITY,
+export const addCoffee = (coffee) => ({
+  type: 'ADD_COFFEE',
+  payload: coffee,
 });
 
-const editCoffee = (updatedCoffee) => ({
-  type: actionTypes.EDIT_COFFEE,
-  payload: updatedCoffee,
+export const updateCoffee = (coffee) => ({
+  type: 'UPDATE_COFFEE',
+  payload: coffee,
 });
 
-const updateCoffee = (updatedCoffee) => ({
-  type: actionTypes.UPDATE_COFFEE,
-  payload: updatedCoffee,
-});
-
-const addCoffee = (newCoffee) => ({
-  type: actionTypes.ADD_COFFEE,
-  payload: newCoffee,
-});
-
-const selectCoffee = (id) => ({
-  type: actionTypes.SELECT_COFFEE,
+export const deleteCoffee = (id) => ({
+  type: 'DELETE_COFFEE',
   payload: id,
 });
 
-const deleteCoffee = (id) => ({
-  type: actionTypes.DELETE_COFFEE,
+export const buyPound = (id) => ({
+  type: 'BUY_POUND',
   payload: id,
 });
 
-const sellPound = (id) => {
-  return (dispatch) => {
-    dispatch({
-      type: actionTypes.SELL_POUND,
-      payload: id,
-    });
-  };
-};
-
-const buyPound = (id) => {
-  return (dispatch) => {
-    dispatch({
-      type: actionTypes.BUY_POUND,
-      payload: id,
-    });
-  };
-};
-
-const toggleBoughtItems = () => ({
-  type: actionTypes.TOGGLE_BOUGHT_ITEMS,
+export const sellPound = (id) => ({
+  type: 'SELL_POUND',
+  payload: id,
 });
-
- export default actionTypes;

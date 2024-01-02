@@ -41,7 +41,8 @@
 * uuid
 * Git
 * vite
-* Redux/toolkit
+* redux
+* jest
 
 ## Setup/Installation Requirements
 
@@ -55,12 +56,11 @@
 
 5. to run the Project site, type these commands into terminal: `npm install`, `npm run dev`, `o + enter`
 
-## Known Bugs
-* cant refactor the site completely. not sure what i can do to fix
+6. to run test use `npx jest` in terminal
 
-## Other repo
-repo this is copied from 
-(https://github.com/gabe9t/projectweek8)
+## Known Bugs
+* None as of now.
+
 
 ## License
 MIT License. See license.md for further information
